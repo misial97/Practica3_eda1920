@@ -1,5 +1,6 @@
 package material.tree.binarytree;
 
+import javafx.geometry.Pos;
 import material.Position;
 import material.tree.iterators.InorderBinaryTreeIterator;
 
@@ -437,8 +438,18 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
 
     @Override
     public boolean isComplete() {
-        //TODO: Practica 3 Ejercicio 1
-        throw new RuntimeException("Not yet implemented");
+        if(this.isEmpty())
+            throw new RuntimeException("The tree is empty!");
+        Iterator<Position<E>> it = this.iterator();
+        boolean result = false;
+        while(it.hasNext()) {
+            Position<E> actualNode = it.next();
+            if ((this.hasLeft(actualNode) && (this.hasRight(actualNode)) || (this.isLeaf(actualNode))))
+                result = true;
+            else
+                return false;
+        }
+        return  result;
     }
 
     // Auxiliary methods
