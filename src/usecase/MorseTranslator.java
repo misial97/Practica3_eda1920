@@ -4,6 +4,7 @@ package usecase;
 import material.Position;
 import material.tree.binarytree.LinkedBinaryTree;
 import material.tree.iterators.InorderBinaryTreeIterator;
+import sun.awt.image.ImageWatched;
 
 public class MorseTranslator {
     //TODO: Practica 3 Ejercicio 3
@@ -14,8 +15,11 @@ public class MorseTranslator {
     private LinkedBinaryTree<String> tree;
 
     public MorseTranslator(){
-
+        this.tree = new LinkedBinaryTree<>();
+        this.tree.addRoot("");
+        //array de caracteres por defecto
         char[] standardCharset = {};
+        //array de codigos por defecto
         String[] standardCodes = {};
         treeInitializer(standardCharset, standardCodes);
     }
@@ -29,7 +33,7 @@ public class MorseTranslator {
      */
     public MorseTranslator(char[] charset, String[] codes) {
         this.tree = new LinkedBinaryTree<>();
-        this.tree.addRoot("start");
+        this.tree.addRoot("");
         treeInitializer(charset, codes);
     }
 
@@ -84,7 +88,44 @@ public class MorseTranslator {
      * @return a plain text translation of the morse code
      */
     public String decode(String morseMessage) {
-        throw new RuntimeException("Not yet implemented");
+        String result = "";
+        Position<String> position = this.tree.root();
+        while (!morseMessage.equals("")) {
+            if (this.tree.isLeaf(position)) {
+                String actualNode = position.getElement();
+                result += actualNode;
+            }
+            if((morseMessage.charAt(0) == ' ') || (this.tree.isLeaf(position))){
+                position = this.tree.root();
+                if((morseMessage.length()>1)&&(morseMessage.charAt(1)==' '))
+                    result += " ";
+            }else if ((morseMessage.charAt(0) == this.LEFT_DOT) &&
+                    ((morseMessage.length() == 1) || ((morseMessage.charAt(1) == ' ')))) {
+
+                position = this.tree.left(position);
+                String actualNode = position.getElement();
+                result += actualNode;
+                if(this.tree.isLeaf(position))
+                    morseMessage = morseMessage.substring(1);
+
+            } else if ((morseMessage.charAt(0) == this.RIGHT_DASH) &&
+                    (morseMessage.length() == 1 || (morseMessage.charAt(1) == ' '))) {
+
+                position = this.tree.right(position);
+                String actualNode = position.getElement();
+                result += actualNode;
+                if(this.tree.isLeaf(position))
+                    morseMessage = morseMessage.substring(1);
+            } else {
+                if (morseMessage.charAt(0) == this.LEFT_DOT)
+                    position = this.tree.left(position);
+                else
+                    position = this.tree.right(position);
+            }
+            if(this.tree.isInternal(position))
+                morseMessage = morseMessage.substring(1);
+        }
+        return result;
     }
 
 
