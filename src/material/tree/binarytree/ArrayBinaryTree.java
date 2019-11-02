@@ -69,7 +69,7 @@ public class ArrayBinaryTree<E> implements BinaryTree<E> {
         BTNode<E> node = checkPosition(v);
         int indexRight = 2 * node.getIndex() + 1;
         if (!hasRight(v)) {
-            throw new RuntimeException("No left child");
+            throw new RuntimeException("No right child");
         }
         return this.binaryArrayTree[indexRight];
     }
@@ -138,7 +138,7 @@ public class ArrayBinaryTree<E> implements BinaryTree<E> {
         int rightIndex = 2 * node.getIndex() + 1;
         Position<E> rightPos = this.binaryArrayTree[rightIndex];
         if (rightPos != null) {
-            throw new RuntimeException("Node already has a left child");
+            throw new RuntimeException("Node already has a right child");
         }
         BTNode<E> newNode = new BTNode<>(e, rightIndex);
         this.binaryArrayTree[rightIndex] = newNode;
@@ -153,7 +153,18 @@ public class ArrayBinaryTree<E> implements BinaryTree<E> {
 
     @Override
     public void swap(Position<E> p1, Position<E> p2) {
+        BTNode<E> node1 = checkPosition(p1);
+        BTNode<E> node2 = checkPosition(p2);
+        int indexNode1 = node1.getIndex();
+        int indexNode2 = node2.getIndex();
 
+        node1.setIndex(indexNode2);
+        node2.setIndex(indexNode1);
+        indexNode1 = node1.getIndex();
+        indexNode2 = node2.getIndex();
+
+        this.binaryArrayTree[indexNode1] = node1;
+        this.binaryArrayTree[indexNode2] = node2;
     }
 
     @Override
