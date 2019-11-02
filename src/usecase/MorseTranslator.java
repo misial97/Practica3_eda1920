@@ -178,11 +178,11 @@ public class MorseTranslator {
         }
     }
 
-    public void imprime(){
+    /*public void imprime(){
         InorderBinaryTreeIterator<String> it = new InorderBinaryTreeIterator<>(this.tree);
         while(it.hasNext()){
             System.out.println(it.next().getElement());
         }
 
-    }
+    }*/
 }
