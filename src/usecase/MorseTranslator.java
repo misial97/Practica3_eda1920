@@ -1,10 +1,12 @@
 package usecase;
 
 
+import javafx.geometry.Pos;
 import material.Position;
 import material.tree.binarytree.LinkedBinaryTree;
 import material.tree.iterators.InorderBinaryTreeIterator;
-import sun.awt.image.ImageWatched;
+
+import java.util.Iterator;
 
 public class MorseTranslator {
     //TODO: Practica 3 Ejercicio 3
@@ -137,7 +139,43 @@ public class MorseTranslator {
      * @return a morse code message
      */
     public String encode(String plainText) {
-        throw new RuntimeException("Not yet implemented");
+        String result = "";
+        boolean found;
+        String charToSearch;
+        InorderBinaryTreeIterator<String> it;
+        while(!plainText.equals("")) {
+            found = false;
+            charToSearch = "" + plainText.charAt(0);
+            it = new InorderBinaryTreeIterator<>(this.tree);
+            if(charToSearch.equals(" ")) {
+                found = true;
+                result += " ";
+            }
+            while (it.hasNext() && !found) {
+                Position<String> actualNode = it.next();
+                if (actualNode.getElement().equals(charToSearch)) {
+                    found = true;
+                    if (this.tree.isLeaf(actualNode))
+                        result += charToMorseCode(actualNode);
+                    else
+                        result += charToMorseCode(actualNode) + " ";
+                }
+            }
+            plainText = plainText.substring(1);
+        }
+        return result;
+    }
+
+    private String charToMorseCode(Position<String> node){
+        if(this.tree.isRoot(node)){
+            return "";
+        }else{
+            Position<String> parent = this.tree.parent(node);
+            if(this.tree.left(parent) == node)
+                return charToMorseCode(parent) + ".";
+            else
+                return charToMorseCode(parent) + "-";
+        }
     }
 
     public void imprime(){
