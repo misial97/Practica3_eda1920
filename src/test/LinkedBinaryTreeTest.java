@@ -1,6 +1,7 @@
 package test;
 
 import material.Position;
+import material.tree.binarytree.ArrayBinaryTree;
 import material.tree.binarytree.BinaryTree;
 import material.tree.binarytree.LinkedBinaryTree;
 
@@ -11,11 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class LinkedBinaryTreeTest {
 
     private LinkedBinaryTree<Character> tree;
+    //private ArrayBinaryTree<Character> tree;
     private Position<Character>[] pos;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         tree = new LinkedBinaryTree<>();
+        //tree = new ArrayBinaryTree<>();
         pos = new Position[11];
         pos[0] = tree.addRoot('*');
         pos[1] = tree.insertLeft(pos[0], '+');

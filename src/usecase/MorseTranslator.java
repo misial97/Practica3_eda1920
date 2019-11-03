@@ -1,13 +1,13 @@
 package usecase;
 
-
 import javafx.geometry.Pos;
 import material.Position;
 import material.tree.binarytree.LinkedBinaryTree;
 import material.tree.iterators.InorderBinaryTreeIterator;
 
-import java.util.Iterator;
-
+/**
+ * Realizado por Miguel Sierra
+ * */
 public class MorseTranslator {
     //TODO: Practica 3 Ejercicio 3
     //derecha -

@@ -435,7 +435,9 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
             lbt.root = null;
         }
     }
-
+/**
+ * Realizado por Miguel Sierra
+ * */
     @Override
     public boolean isComplete() {
         if(this.isEmpty())

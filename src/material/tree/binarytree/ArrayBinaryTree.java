@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * Realizado por Miguel Sierra
+ * */
 public class ArrayBinaryTree<E> implements BinaryTree<E> {
     //TODO: Practica 3 Ejercicio 2
     private class BTNode<T> implements Position<T> {
