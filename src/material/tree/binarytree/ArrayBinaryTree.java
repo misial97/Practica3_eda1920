@@ -174,12 +174,26 @@ public class ArrayBinaryTree<E> implements BinaryTree<E> {
 
     @Override
     public void attachLeft(Position<E> p, BinaryTree<E> tree) throws RuntimeException {
-
+        BTNode<E> node = checkPosition(p);
+        if (tree == this) {
+            throw new RuntimeException("Cannot attach a tree over himself");
+        }
+        if (this.hasLeft(p)) {
+            throw new RuntimeException("Node already has a left child");
+        }
+        /**/
     }
 
     @Override
     public void attachRight(Position<E> p, BinaryTree<E> tree) throws RuntimeException {
-
+        BTNode<E> node = checkPosition(p);
+        if (tree == this) {
+            throw new RuntimeException("Cannot attach a tree over himself");
+        }
+        if (this.hasRight(p)) {
+            throw new RuntimeException("Node already has a right child");
+        }
+        /**/
     }
 
     @Override
